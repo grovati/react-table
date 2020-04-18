@@ -1,6 +1,11 @@
 import React from 'react'; 
 
 const Row = ({content, isHeader}) => {
+  // Format the balance column cells to represent currency
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD'
+  })
   
   // theadRow will render the table's columns headers
   const theadRow = (
@@ -18,7 +23,7 @@ const Row = ({content, isHeader}) => {
       <td>{rowData.firstName}</td>
       <td>{rowData.lastName}</td>
       <td>{rowData.minPaymentPercentage}%</td>
-      <td>{rowData.balance}</td>
+      <td>{formatter.format(rowData.balance)}</td>
     </tr>
   );
 
