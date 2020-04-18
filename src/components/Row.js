@@ -1,6 +1,6 @@
 import React from 'react'; 
 
-const Row = ({content, isHeader}) => {
+const Row = ({content, data, setData, isHeader}) => {
   // Format the balance column cells to represent currency
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -8,17 +8,41 @@ const Row = ({content, isHeader}) => {
   })
   
   // theadRow will render the table's columns headers
+  // Creates a checkbox that will select and deselect all of table body rows
   const theadRow = (
     <tr key='heading'>
-        {content.map( header =>
-          <th key={header} scope='col'>{header}</th>
-        )}
+      <th scope='col'>
+        <input type='checkbox' onChange={ e => {
+          let checked = e.target.checked;
+
+          setData( data.map( ele => {
+            ele.select = checked;
+
+            return ele;
+          }));
+        }}/>
+      </th>
+      {content.map( header =>
+        <th key={header} scope='col'>{header}</th>
+      )}
     </tr>
   );
 
   // tbodyRow will render the table body rows 
+  // Checkbox cell should track changes in its checked attribute by checking the select property in each row data
   const tbodyRow = content.map( rowData =>
     <tr key={`row-${rowData.id}`}>
+      <td>
+        <input type='checkbox' checked={rowData.select} onChange={ e => {
+          let checked = e.target.checked;
+
+          setData( content.map( ele => {
+            if(rowData.id === ele.id) ele.select = checked;
+
+            return ele;
+          }));
+        }}/>
+      </td>
       <td>{rowData.creditorName}</td>
       <td>{rowData.firstName}</td>
       <td>{rowData.lastName}</td>

@@ -19,16 +19,16 @@ const Styled = styled('div')`
 `;
 
 //Use columns and data to create the UI
-const BalanceTable = ({columns, data}) => {
+const BalanceTable = ({columns, data, setData}) => {
 
   return (
     <Styled>
       <table>
         <thead>
-          <Row content={columns} isHeader={true}/>
+          <Row content={columns} data={data} setData={setData} isHeader={true}/>
         </thead>
         <tbody>
-          <Row content={data} isHeader={false}/>
+          <Row content={data} setData={setData} isHeader={false}/>
         </tbody>
       </table>
     </Styled>
