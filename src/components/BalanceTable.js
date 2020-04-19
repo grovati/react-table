@@ -28,8 +28,21 @@ const Styled = styled('div')`
   };
 `;
 
-//Use columns and data to create the UI
+// Use columns and data to create the UI
 const BalanceTable = ({columns, data, setData}) => {
+  // Maintain count of rows that have been selected and their balance sum
+  let selectCount = 0;
+  let selectBalance = 0;
+
+  // Iterate through my data and collect balance from selected rows
+  data.forEach(({select, balance}) => {
+    if(select === true) {
+      selectCount += 1;
+
+      if( typeof balance === 'string') selectBalance += Number(balance);
+      else selectBalance += balance;
+    };
+  });
 
   // Delete any selected rows on click of button
   // by creating new array that will set my state
@@ -57,6 +70,14 @@ const BalanceTable = ({columns, data, setData}) => {
         <button>Add Debt</button>
       </Link>
       <button onClick={deleteHanlde}>Delete Debt</button>
+      <section>
+        <p>Total:</p>
+        <p>${selectBalance}</p>
+      </section>
+      <section>
+        <p>Total Row Count: {data.length}</p>
+        <p>Total Rows Selected: {selectCount}</p>
+      </section>
     </Styled>
   );
 };
