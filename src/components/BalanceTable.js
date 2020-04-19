@@ -31,6 +31,18 @@ const Styled = styled('div')`
 //Use columns and data to create the UI
 const BalanceTable = ({columns, data, setData}) => {
 
+  // Delete any selected rows on click of button
+  // by creating new array that will set my state
+  const deleteHanlde = () => {
+    const newData = [];
+
+    data.forEach( ele => {
+      if(ele.select === false) newData.push(ele);
+    });
+
+    setData(newData);
+  };
+
   return (
     <Styled>
       <table>
@@ -44,6 +56,7 @@ const BalanceTable = ({columns, data, setData}) => {
       <Link to='/add'>
         <button>Add Debt</button>
       </Link>
+      <button onClick={deleteHanlde}>Delete Debt</button>
     </Styled>
   );
 };
