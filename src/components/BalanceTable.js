@@ -26,6 +26,16 @@ const Styled = styled('div')`
     border-radius: 8px;
     cursor: pointer;
   };
+
+  section {
+    width: 350px;
+    display: flex;
+    justify-content: space-between;
+
+    p {
+      margin: 5px;
+    };
+  };
 `;
 
 // Use columns and data to create the UI
@@ -70,7 +80,7 @@ const BalanceTable = ({columns, data, setData}) => {
         <button>Add Debt</button>
       </Link>
       <button onClick={deleteHanlde}>Delete Debt</button>
-      <section>
+      <section style={{width: '505px', backgroundColor: '#00CED1'}}>
         <p>Total:</p>
         <p>${selectBalance}</p>
       </section>
