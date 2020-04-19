@@ -30,8 +30,8 @@ const Row = ({content, data, setData, isHeader}) => {
 
   // tbodyRow will render the table body rows 
   // Checkbox cell should track changes in its checked attribute by checking the select property in each row data
-  const tbodyRow = content.map( rowData =>
-    <tr key={`row-${rowData.id}`}>
+  const tbodyRow = content.map( (rowData, index) =>
+    <tr key={`row-${rowData.id || 'i' + index}`}>
       <td>
         <input type='checkbox' checked={rowData.select} onChange={ e => {
           let checked = e.target.checked;
@@ -51,7 +51,7 @@ const Row = ({content, data, setData, isHeader}) => {
     </tr>
   );
 
-  // Return header row or body rows dependeing on the is isHeader flag
+  // Set variable equal to header row or body rows depending on the isHeader flag value
   const createRow = isHeader ? theadRow : tbodyRow;
 
   return (createRow);

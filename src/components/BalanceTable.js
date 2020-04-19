@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {Link} from 'react-router-dom';
 import Row from './Row';
 
 const Styled = styled('div')`
@@ -31,6 +32,9 @@ const BalanceTable = ({columns, data, setData}) => {
           <Row content={data} setData={setData} isHeader={false}/>
         </tbody>
       </table>
+      <Link to='/add'>
+        <button>Add Debt</button>
+      </Link>
     </Styled>
   );
 };
